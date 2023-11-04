@@ -1,9 +1,9 @@
 import { PageWrapper } from "~/components/page-transition-wrapper";
 import { api } from "~/trpc/server";
 import Link from "next/link";
-import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import React from "react";
+import GPTAnswer from "~/components/gpt-answer-generation";
 
 export default async function PostPage({
   params,
@@ -56,6 +56,8 @@ export default async function PostPage({
             <p className={"whitespace-pre-line"}>{post.description}</p>
           </div>
         </div>
+        <GPTAnswer question={post.title} description={post.description} />
+
         <hr className={`my-6`} />
       </div>
     </PageWrapper>
