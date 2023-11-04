@@ -1,4 +1,8 @@
-import {createTRPCRouter, protectedProcedure, publicProcedure} from "~/server/api/trpc";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "~/server/api/trpc";
 
 import * as z from "zod";
 
@@ -31,20 +35,20 @@ export const postRouter = createTRPCRouter({
     }),
 
   search: publicProcedure
-      .input(
-          z.object({
-            question: z.string(),
-          }),
-      )
-      .query(({ ctx, input }) => {
-        if(input.question === "") return undefined;
-
-        return ctx.db.post.findMany({
-          where: {
-            title: {
-              contains: input.question,
-            },
-          },
-        });
+    .input(
+      z.object({
+        question: z.string(),
       }),
+    )
+    .query(({ ctx, input }) => {
+      if (input.question === "") return undefined;
+
+      return ctx.db.post.findMany({
+        where: {
+          title: {
+            contains: input.question,
+          },
+        },
+      });
+    }),
 });

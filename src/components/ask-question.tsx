@@ -2,11 +2,13 @@
 
 import { Textarea } from "~/components/ui/textarea";
 import { Button } from "~/components/ui/button";
-import { useState} from "react";
+import { useState } from "react";
 import { Icons } from "~/components/loading-spinner";
 import { api } from "~/trpc/react";
-import {Toaster} from "~/components/ui/toaster";
-import {useToast} from "~/components/ui/use-toast";
+import { Toaster } from "~/components/ui/toaster";
+import { useToast } from "~/components/ui/use-toast";
+import { ScrollArea } from "src/components/ui/scroll-area";
+import { Separator } from "src/components/ui/separator";
 
 export default function AskQuestion() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -18,30 +20,31 @@ export default function AskQuestion() {
   });
 
   const [question, setQuestion] = useState<string>("");
-  const {data: searchResultsData, isLoading: searchResultsLoading} = api.post.search.useQuery({
-    question: question
-  })
+  const { data: searchResultsData, isLoading: searchResultsLoading } =
+    api.post.search.useQuery({
+      question: question,
+    });
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
 
-    if(searchResultsData && searchResultsData.length > 0) {
-        setIsLoading(false);
-        toast.toast({
-            title: "Error",
-            description: "This question has already been asked"
-        });
-        return
+    if (searchResultsData && searchResultsData.length > 0) {
+      setIsLoading(false);
+      toast.toast({
+        title: "Error",
+        description: "This question has already been asked",
+      });
+      return;
     }
 
-    if(question.length == 0) {
-        setIsLoading(false);
-        toast.toast({
-            title: "Error",
-            description: "Please enter a question"
-        });
-        return
+    if (question.length == 0) {
+      setIsLoading(false);
+      toast.toast({
+        title: "Error",
+        description: "Please enter a question",
+      });
+      return;
     }
 
     try {
@@ -57,16 +60,13 @@ export default function AskQuestion() {
       setIsLoading(false);
       toast.toast({
         title: "Error",
-        description: "Something went wrong. Please try again."
+        description: "Something went wrong. Please try again.",
       });
     }
-  }
+  };
 
   return (
-    <form
-      className={`relative w-full max-w-2xl`}
-      onSubmit={handleSubmit}
-    >
+    <form className={`relative w-full max-w-2xl`} onSubmit={handleSubmit}>
       <Textarea
         rows={1}
         className={`w-full p-4`}
@@ -74,9 +74,9 @@ export default function AskQuestion() {
         name={`question`}
         onChange={(event) => {
           if (event.target.value.length == 0) {
-            return
+            return;
           }
-          setQuestion(event.target.value)
+          setQuestion(event.target.value);
         }}
         id={`question`}
         placeholder="Start typing your query..."
@@ -88,10 +88,32 @@ export default function AskQuestion() {
           <p>Ask</p>
         )}
       </Button>
+      {searchResultsData && question.length > 1 ? (
+        <div>
+          <ScrollArea className="w-full rounded-md border">
+            <div className="fixed p-4">
+              {searchResultsData.map((result) => (
+                <>
+                  <Button
+                    variant={`ghost`}
+                    key={result.title}
+                    className="text-sm font-normal"
+                  >
+                    {result.title.charAt(0).toUpperCase() +
+                      result.title.slice(1) +
+                      " ?"}
+                  </Button>
+                  <Separator className="my-2" />
+                </>
+              ))}
 
-      {
-        searchResultsData && JSON.stringify(searchResultsData.map((result) => result.title))
-      }
+              {searchResultsData.length == 0 ? (
+                <div className="text-sm">No results found</div>
+              ) : null}
+            </div>
+          </ScrollArea>
+        </div>
+      ) : null}
 
       <Toaster />
     </form>
