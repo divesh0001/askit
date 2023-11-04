@@ -151,7 +151,7 @@ export default function AskQuestion({ isSignedIn }: { isSignedIn: boolean }) {
       {searchResultsData && question.length > 1 ? (
         <div>
           <ScrollArea className="w-full rounded-md border">
-            <div className="fixed p-4">
+            <div className="fixed bg-background p-4">
               {searchResultsData.map((result) => (
                 <>
                   <Button
@@ -160,8 +160,7 @@ export default function AskQuestion({ isSignedIn }: { isSignedIn: boolean }) {
                     className="text-sm font-normal"
                   >
                     {result.title.charAt(0).toUpperCase() +
-                      result.title.slice(1) +
-                      " ?"}
+                      result.title.slice(1)}
                   </Button>
                   <Separator className="my-2" />
                 </>
