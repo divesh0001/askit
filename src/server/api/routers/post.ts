@@ -12,6 +12,7 @@ export const postRouter = createTRPCRouter({
       z.object({
         question: z.string(),
         description: z.string(),
+        categories: z.array(z.string()),
       }),
     )
     .mutation(({ ctx, input }) => {
@@ -26,6 +27,7 @@ export const postRouter = createTRPCRouter({
         data: {
           title: input.question,
           description: input.description,
+          categories: input.categories,
           author: {
             connect: {
               id: ctx.session.user.id,
@@ -55,6 +57,10 @@ export const postRouter = createTRPCRouter({
     }),
 
   fetch: publicProcedure.query(({ ctx, input }) => {
-    return ctx.db.post.findMany({});
+    return ctx.db.post.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
   }),
 });

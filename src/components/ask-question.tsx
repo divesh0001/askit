@@ -28,6 +28,9 @@ export default function AskQuestion({ isSignedIn }: { isSignedIn: boolean }) {
     },
   });
 
+  const [currentCategory, setCurrentCategory] = useState<string>("");
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+
   const [question, setQuestion] = useState<string>("");
   const { data: searchResultsData, isLoading: searchResultsLoading } =
     api.post.search.useQuery({
@@ -74,6 +77,7 @@ export default function AskQuestion({ isSignedIn }: { isSignedIn: boolean }) {
       await createQuestion.mutateAsync({
         question: question,
         description: description,
+        categories: selectedCategories,
       });
       setIsLoading(false);
       toast.toast({
@@ -141,7 +145,54 @@ export default function AskQuestion({ isSignedIn }: { isSignedIn: boolean }) {
               placeholder={`Description of your question`}
             />
 
-            <Button className={`mt-4 w-full`} variant={`outline`}>
+            {selectedCategories.length > 0 ? (
+              <div className={`my-4 rounded-xl border p-4`}>
+                <p className={`text-sm font-bold`}>Selected Categories:</p>
+                {selectedCategories.map((category) => (
+                  <div
+                    key={category}
+                    className={`text-sm text-muted-foreground`}
+                  >
+                    {category},
+                  </div>
+                ))}
+              </div>
+            ) : null}
+
+            <div className={`mt-4 flex items-center`}>
+              <Input
+                placeholder={`Category`}
+                className={`w-full`}
+                onChange={(event) => {
+                  setCurrentCategory(event.target.value);
+                }}
+                value={currentCategory}
+              />
+
+              <Button
+                type={`button`}
+                className={``}
+                variant={`outline`}
+                onClick={() => {
+                  if (currentCategory.length == 0) {
+                    return;
+                  }
+                  setSelectedCategories([
+                    ...selectedCategories,
+                    currentCategory,
+                  ]);
+                  setCurrentCategory("");
+                }}
+              >
+                Add
+              </Button>
+            </div>
+
+            <Button
+              type={`submit`}
+              className={`mt-4 w-full`}
+              variant={`outline`}
+            >
               Post
             </Button>
           </form>

@@ -66,6 +66,7 @@ model Post {
   createdAt   DateTime  @default(now())
   author      User?     @relation(fields: [authorId], references: [id])
   authorId    String?   @db.ObjectId
+  categories  String[]
   Comments    Comment[]
 }
 
