@@ -3,12 +3,21 @@
 import { Textarea } from "~/components/ui/textarea";
 import { Button } from "~/components/ui/button";
 import { useState } from "react";
-import { Icons } from "~/components/loading-spinner";
 import { api } from "~/trpc/react";
 import { Toaster } from "~/components/ui/toaster";
 import { useToast } from "~/components/ui/use-toast";
 import { ScrollArea } from "src/components/ui/scroll-area";
 import { Separator } from "src/components/ui/separator";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "src/components/ui/dialog";
+import { Input } from "~/components/ui/input";
 
 export default function AskQuestion() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -47,9 +56,24 @@ export default function AskQuestion() {
       return;
     }
 
+    const target = event.target as typeof event.target & {
+      description: { value: string };
+    };
+    const description = target.description.value;
+
+    if (description.length == 0) {
+      setIsLoading(false);
+      toast.toast({
+        title: "Error",
+        description: "Please enter a description",
+      });
+      return;
+    }
+
     try {
       await createQuestion.mutateAsync({
         question: question,
+        description: description,
       });
       setIsLoading(false);
       toast.toast({
@@ -66,7 +90,7 @@ export default function AskQuestion() {
   };
 
   return (
-    <form className={`relative w-full max-w-2xl`} onSubmit={handleSubmit}>
+    <div className={`relative w-full max-w-2xl`}>
       <Textarea
         rows={1}
         className={`w-full p-4`}
@@ -81,13 +105,48 @@ export default function AskQuestion() {
         id={`question`}
         placeholder="Start typing your query..."
       />
-      <Button className={`absolute right-4 top-3`} disabled={isLoading}>
-        {isLoading ? (
-          <Icons.spinner className="h-4 w-4 animate-spin" />
-        ) : (
-          <p>Ask</p>
-        )}
-      </Button>
+
+      <Dialog>
+        <DialogTrigger
+          className={`absolute right-4 top-3`}
+          disabled={
+            question.length == 0 ||
+            (searchResultsData && searchResultsData.length > 0)
+          }
+          asChild
+        >
+          <Button>Ask</Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className={`mb-2`}>Post your question</DialogTitle>
+            <DialogDescription>
+              Post your question in a way that is easy to understand. Provide as
+              much detail as possible.
+            </DialogDescription>
+          </DialogHeader>
+
+          <form onSubmit={handleSubmit}>
+            <Input
+              className={`w-full`}
+              placeholder={`Title of your question`}
+              value={question}
+            />
+            <Textarea
+              className={`mt-2 w-full`}
+              rows={4}
+              id={`description`}
+              name={`description`}
+              placeholder={`Description of your question`}
+            />
+
+            <Button className={`mt-4`} variant={`outline`}>
+              Post
+            </Button>
+          </form>
+        </DialogContent>
+      </Dialog>
+
       {searchResultsData && question.length > 1 ? (
         <div>
           <ScrollArea className="w-full rounded-md border">
@@ -115,7 +174,19 @@ export default function AskQuestion() {
         </div>
       ) : null}
 
+      <Dialog>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Are you sure absolutely sure?</DialogTitle>
+            <DialogDescription>
+              This action cannot be undone. This will permanently delete your
+              account and remove your data from our servers.
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
+
       <Toaster />
-    </form>
+    </div>
   );
 }

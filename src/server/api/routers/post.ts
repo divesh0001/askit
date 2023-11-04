@@ -11,6 +11,7 @@ export const postRouter = createTRPCRouter({
     .input(
       z.object({
         question: z.string(),
+        description: z.string(),
       }),
     )
     .mutation(({ ctx, input }) => {
