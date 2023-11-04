@@ -47,6 +47,9 @@ dependencies:
   "@trpc/server":
     specifier: ^10.37.1
     version: 10.43.1
+  bcryptjs:
+    specifier: ^2.4.3
+    version: 2.4.3
   class-variance-authority:
     specifier: ^0.7.0
     version: 0.7.0
@@ -74,6 +77,9 @@ dependencies:
   react-dom:
     specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
+  react-icons:
+    specifier: ^4.11.0
+    version: 4.11.0(react@18.2.0)
   superjson:
     specifier: ^1.13.1
     version: 1.13.3
@@ -88,6 +94,9 @@ dependencies:
     version: 3.22.4
 
 devDependencies:
+  "@types/bcryptjs":
+    specifier: ^2.4.5
+    version: 2.4.5
   "@types/eslint":
     specifier: ^8.44.2
     version: 8.44.6
@@ -1390,6 +1399,13 @@ packages:
     engines: { node: ">=18.0.0" }
     dev: false
 
+  /@types/bcryptjs@2.4.5:
+    resolution:
+      {
+        integrity: sha512-tOF6TivOIvq+TWQm78335CMdyVJhpBG3NUdWQDAp95ax4E2rSKbws/ELHLk5EBoucwx/tHt3/hhLOHwWJgVrSw==,
+      }
+    dev: true
+
   /@types/eslint@8.44.6:
     resolution:
       {
@@ -1893,6 +1909,13 @@ packages:
       {
         integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==,
       }
+
+  /bcryptjs@2.4.3:
+    resolution:
+      {
+        integrity: sha512-V/Hy/X9Vt7f3BbPJEi8BdVFMByHi+jNXrYkW3huaybV/kQ0KJg0Y6PkEMbn+zeT+i+SiKZ/HMqJGIIt4LZDqNQ==,
+      }
+    dev: false
 
   /binary-extensions@2.2.0:
     resolution:
@@ -4255,6 +4278,17 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-icons@4.11.0(react@18.2.0):
+    resolution:
+      {
+        integrity: sha512-V+4khzYcE5EBk/BvcuYRq6V/osf11ODUM2J8hg2FDSswRrGvqiYUYPRy4OdrWaQOBj4NcpJfmHZLNaD+VH0TyA==,
+      }
+    peerDependencies:
+      react: "*"
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is@16.13.1:
