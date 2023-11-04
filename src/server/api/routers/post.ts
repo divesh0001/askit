@@ -25,7 +25,7 @@ export const postRouter = createTRPCRouter({
         // @ts-ignore
         data: {
           title: input.question,
-          description: "placeholder",
+          description: input.description,
           author: {
             connect: {
               id: ctx.session.user.id,
