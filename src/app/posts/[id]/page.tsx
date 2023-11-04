@@ -14,7 +14,7 @@ export default async function PostPage({
 }) {
   const post = await api.post.fetch.query({ id: params.id });
 
-  if (post?.authorId === null) {
+  if (!post) {
     return (
       <PageWrapper className={`flex min-h-screen items-center justify-center`}>
         <div>
@@ -32,7 +32,7 @@ export default async function PostPage({
     );
   }
 
-  const user = await api.user.fetch.query({ id: post.authorId });
+  const user = await api.user.fetch.query({ id: post.authorId ?? "" });
 
   return (
     <PageWrapper className={`pt-16`}>
