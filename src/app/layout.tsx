@@ -5,6 +5,7 @@ import { GeistSans } from "geist/font";
 import { TRPCReactProvider } from "~/trpc/react";
 import { ThemeProvider } from "~/components/theme-provider";
 import NavBar from "~/components/navbar";
+import NextTopLoader from "nextjs-toploader";
 
 export const metadata = {
   title: "Askit",
@@ -28,6 +29,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <NextTopLoader showSpinner={false} color={"#808080"} />
             <NavBar />
             <main>{children}</main>
           </ThemeProvider>

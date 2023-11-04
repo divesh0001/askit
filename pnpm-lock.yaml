@@ -86,6 +86,9 @@ dependencies:
   next-themes:
     specifier: ^0.2.1
     version: 0.2.1(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)
+  nextjs-toploader:
+    specifier: ^1.6.4
+    version: 1.6.4(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)
   react:
     specifier: 18.2.0
     version: 18.2.0
@@ -1560,6 +1563,13 @@ packages:
       }
     dependencies:
       undici-types: 5.26.5
+
+  /@types/nprogress@0.2.2:
+    resolution:
+      {
+        integrity: sha512-2wLrSJXLztGmr7wXwM0hA/wuIOY9DznVdd+ZFofHOiXcj9JnVt+2ZeLRJ7v5ZVlmheSkUOSg3Q3O4Ce7yji79A==,
+      }
+    dev: false
 
   /@types/prop-types@15.7.9:
     resolution:
@@ -3964,6 +3974,24 @@ packages:
       - babel-plugin-macros
     dev: false
 
+  /nextjs-toploader@1.6.4(next@13.5.6)(react-dom@18.2.0)(react@18.2.0):
+    resolution:
+      {
+        integrity: sha512-KYLQ+0MvGdFk9JwOQfRtaYBAsyuX67Ca5QTa51RGNO4gQx64KLSE+ryHjUQ5LcDczHotp0l32GgksQW9vucUkw==,
+      }
+    peerDependencies:
+      next: ">= 6.0.0"
+      react: ">= 16.0.0"
+      react-dom: ">= 16.0.0"
+    dependencies:
+      "@types/nprogress": 0.2.2
+      next: 13.5.6(react-dom@18.2.0)(react@18.2.0)
+      nprogress: 0.2.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
   /node-releases@2.0.13:
     resolution:
       {
@@ -3985,6 +4013,13 @@ packages:
       }
     engines: { node: ">=0.10.0" }
     dev: true
+
+  /nprogress@0.2.0:
+    resolution:
+      {
+        integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==,
+      }
+    dev: false
 
   /oauth@0.9.15:
     resolution:
@@ -4443,7 +4478,6 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
-    dev: true
 
   /punycode@2.3.1:
     resolution:
@@ -4487,7 +4521,6 @@ packages:
       {
         integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==,
       }
-    dev: true
 
   /react-remove-scroll-bar@2.3.4(@types/react@18.2.34)(react@18.2.0):
     resolution:

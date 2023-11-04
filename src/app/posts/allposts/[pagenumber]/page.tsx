@@ -2,6 +2,7 @@ import { api } from "~/trpc/server";
 import { PageWrapper } from "~/components/page-transition-wrapper";
 import { Badge } from "~/components/ui/badge";
 import Link from "next/link";
+import { Button } from "~/components/ui/button";
 
 function howLongAgo(date: Date) {
   const diff = Date.now() - date.getTime();
@@ -30,8 +31,16 @@ function howLongAgo(date: Date) {
   return "just now";
 }
 
-export default async function PostsPage() {
-  const posts = await api.post.fetchAll.query();
+export default async function PostsPage({
+  params,
+}: {
+  params: { pagenumber: string };
+}) {
+  const pagenumber = parseInt(params.pagenumber ?? 0);
+  const posts = await api.post.fetchAll.query({
+    skip: pagenumber * 10,
+    take: 10,
+  });
 
   return (
     <PageWrapper className={`pt-16`}>
@@ -66,6 +75,23 @@ export default async function PostsPage() {
             </div>
           </Link>
         ))}
+
+        {posts.length === 0 ? (
+          <div className={`flex min-h-[80dvh] items-center justify-center`}>
+            <p className={`text-muted-foreground`}>No more posts to show.</p>
+          </div>
+        ) : (
+          <div className={`flex justify-center`}>
+            <Link href={`/posts/allposts/${pagenumber - 1}`}>
+              <Button className={`${pagenumber === 0 ? "hidden" : ""} mr-4`}>
+                Previous
+              </Button>
+            </Link>
+            <Link href={`/posts/allposts/${pagenumber + 1}`}>
+              <Button>Next</Button>
+            </Link>
+          </div>
+        )}
       </div>
     </PageWrapper>
   );

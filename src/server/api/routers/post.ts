@@ -56,13 +56,22 @@ export const postRouter = createTRPCRouter({
       });
     }),
 
-  fetchAll: publicProcedure.query(({ ctx, input }) => {
-    return ctx.db.post.findMany({
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-  }),
+  fetchAll: publicProcedure
+    .input(
+      z.object({
+        skip: z.number().optional(),
+        take: z.number().optional(),
+      }),
+    )
+    .query(({ ctx, input }) => {
+      return ctx.db.post.findMany({
+        orderBy: {
+          createdAt: "desc",
+        },
+        skip: input?.skip,
+        take: input?.take,
+      });
+    }),
 
   fetch: publicProcedure
     .input(
