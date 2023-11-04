@@ -110,7 +110,7 @@ export default function AskQuestion({ isSignedIn }: { isSignedIn: boolean }) {
         <DialogTrigger
           className={`absolute right-4 top-3`}
           disabled={
-            isSignedIn == false ||
+            !isSignedIn ||
             question.length == 0 ||
             (searchResultsData && searchResultsData.length > 0)
           }
@@ -141,7 +141,7 @@ export default function AskQuestion({ isSignedIn }: { isSignedIn: boolean }) {
               placeholder={`Description of your question`}
             />
 
-            <Button className={`mt-4`} variant={`outline`}>
+            <Button className={`mt-4 w-full`} variant={`outline`}>
               Post
             </Button>
           </form>
