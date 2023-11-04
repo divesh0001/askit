@@ -4,6 +4,7 @@ import { Button } from "~/components/ui/button";
 import SignoutButton from "~/components/signout-button";
 import { PageWrapper } from "~/components/page-transition-wrapper";
 import { Textarea } from "~/components/ui/textarea";
+import AskQuestion from "~/components/ask-question";
 
 export default async function Home() {
   const session = await getServerAuthSession();
@@ -16,14 +17,7 @@ export default async function Home() {
           <h2 className="text-base">Got any questions? Just Askit!</h2>
         </div>
         <div className={`flex w-full items-center justify-center px-4`}>
-          <div className={`relative w-full max-w-2xl`}>
-            <Textarea
-              rows={1}
-              className={`w-full p-4`}
-              placeholder="Start typing your query..."
-            />
-            <Button className={`absolute right-4 top-3`}>Enter</Button>
-          </div>
+          <AskQuestion />
         </div>
         {session !== null ? (
           <>
