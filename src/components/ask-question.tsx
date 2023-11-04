@@ -18,15 +18,18 @@ import {
   DialogTrigger,
 } from "src/components/ui/dialog";
 import { Input } from "~/components/ui/input";
+import { useRouter } from "next/navigation";
 
 export default function AskQuestion({ isSignedIn }: { isSignedIn: boolean }) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const toast = useToast();
+  const [textareaRows, setTextareaRows] = useState<number>(1);
   const createQuestion = api.post.create.useMutation({
     onSuccess: () => {
       setIsLoading(false);
     },
   });
+  const router = useRouter();
 
   const [currentCategory, setCurrentCategory] = useState<string>("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -64,6 +67,8 @@ export default function AskQuestion({ isSignedIn }: { isSignedIn: boolean }) {
     };
     const description = target.description.value;
 
+    target.description.value = "";
+
     if (description.length == 0) {
       setIsLoading(false);
       toast.toast({
@@ -79,25 +84,27 @@ export default function AskQuestion({ isSignedIn }: { isSignedIn: boolean }) {
         description: description,
         categories: selectedCategories,
       });
-      setIsLoading(false);
       toast.toast({
         title: "Success",
         description: "Your question has been submitted",
       });
     } catch (error) {
-      setIsLoading(false);
       toast.toast({
         title: "Error",
         description: "Something went wrong. Please try again.",
       });
     }
+
+    setIsLoading(false);
+    setQuestion("");
+    setSelectedCategories([]);
   };
 
   return (
     <div className={`relative w-full max-w-2xl`}>
       <Textarea
-        rows={1}
-        className={`w-full p-4`}
+        rows={textareaRows}
+        className={`w-full p-4 pr-20`}
         disabled={isLoading}
         name={`question`}
         onChange={(event) => {
@@ -105,6 +112,12 @@ export default function AskQuestion({ isSignedIn }: { isSignedIn: boolean }) {
             return;
           }
           setQuestion(event.target.value);
+        }}
+        onKeyDown={(event) => {
+          if (event.key == "Enter") {
+            setTextareaRows(textareaRows + 1);
+            return;
+          }
         }}
         id={`question`}
         placeholder="Start typing your query..."
@@ -200,15 +213,18 @@ export default function AskQuestion({ isSignedIn }: { isSignedIn: boolean }) {
       </Dialog>
 
       {searchResultsData && question.length > 1 ? (
-        <div>
-          <ScrollArea className="w-full rounded-md border">
-            <div className="fixed bg-background p-4">
+        <div className={`absolute w-full`}>
+          <ScrollArea className="h-72 w-full rounded-md border">
+            <div className="bg-background p-4">
               {searchResultsData.map((result) => (
                 <>
                   <Button
                     variant={`ghost`}
                     key={result.title}
-                    className="text-sm font-normal"
+                    onClick={() => {
+                      router.push(`/posts/${result.id}`);
+                    }}
+                    className="overflow-x-scroll text-sm font-normal"
                   >
                     {result.title.charAt(0).toUpperCase() +
                       result.title.slice(1)}

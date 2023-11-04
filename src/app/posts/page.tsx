@@ -1,6 +1,7 @@
 import { api } from "~/trpc/server";
 import { PageWrapper } from "~/components/page-transition-wrapper";
 import { Badge } from "~/components/ui/badge";
+import Link from "next/link";
 
 function howLongAgo(date: Date) {
   const diff = Date.now() - date.getTime();
@@ -30,39 +31,40 @@ function howLongAgo(date: Date) {
 }
 
 export default async function PostsPage() {
-  const posts = await api.post.fetch.query();
+  const posts = await api.post.fetchAll.query();
 
   return (
     <PageWrapper className={`pt-16`}>
       <div className={`p-6`}>
         <h1 className={`mb-6 text-xl font-bold`}>Recent Posts</h1>
         {posts.map((post) => (
-          <div
-            key={post.id}
-            className={`mb-4 rounded-xl border p-6 transition-all duration-300 ease-in-out hover:cursor-pointer hover:border-primary`}
-          >
-            <div className={`mb-3 flex items-center justify-between`}>
-              <h2 className={`font-bold`}>{post.title}</h2>
-              <p className={`text-end text-sm text-muted-foreground`}>
-                {howLongAgo(post.createdAt)}
+          <Link key={post.id} href={`/posts/${post.id}/`}>
+            <div
+              className={`mb-4 rounded-xl border p-6 transition-all duration-300 ease-in-out hover:cursor-pointer hover:border-primary`}
+            >
+              <div className={`mb-3 flex items-center justify-between`}>
+                <h2 className={`font-bold`}>{post.title}</h2>
+                <p className={`text-end text-sm text-muted-foreground`}>
+                  {howLongAgo(post.createdAt)}
+                </p>
+              </div>
+              <p className={`mb-2 line-clamp-3 text-muted-foreground`}>
+                {post.description}
               </p>
-            </div>
-            <p className={`mb-2 line-clamp-3 text-muted-foreground`}>
-              {post.description}
-            </p>
 
-            <div className={`space-x-2`}>
-              {post.categories.length > 0 ? (
-                post.categories.map((category, index) => (
-                  <Badge key={index} variant="outline">
-                    {category}
-                  </Badge>
-                ))
-              ) : (
-                <></>
-              )}
+              <div className={`space-x-2`}>
+                {post.categories.length > 0 ? (
+                  post.categories.map((category, index) => (
+                    <Badge key={index} variant="outline">
+                      {category}
+                    </Badge>
+                  ))
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </PageWrapper>
