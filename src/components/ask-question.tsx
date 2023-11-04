@@ -19,7 +19,7 @@ import {
 } from "src/components/ui/dialog";
 import { Input } from "~/components/ui/input";
 
-export default function AskQuestion() {
+export default function AskQuestion({ isSignedIn }: { isSignedIn: boolean }) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const toast = useToast();
   const createQuestion = api.post.create.useMutation({
@@ -110,6 +110,7 @@ export default function AskQuestion() {
         <DialogTrigger
           className={`absolute right-4 top-3`}
           disabled={
+            isSignedIn == false ||
             question.length == 0 ||
             (searchResultsData && searchResultsData.length > 0)
           }
