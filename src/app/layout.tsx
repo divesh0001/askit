@@ -1,9 +1,9 @@
 import "~/styles/globals.css";
 
 import { headers } from "next/headers";
-import { GeistSans } from 'geist/font'
+import { GeistSans } from "geist/font";
 import { TRPCReactProvider } from "~/trpc/react";
-import {ThemeProvider} from "~/components/theme-provider";
+import { ThemeProvider } from "~/components/theme-provider";
 
 export const metadata = {
   title: "Create T3 App",
@@ -21,14 +21,14 @@ export default function RootLayout({
       <body>
         <TRPCReactProvider headers={headers()}>
           <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
           >
-          {children}
+            {children}
           </ThemeProvider>
-          </TRPCReactProvider>
+        </TRPCReactProvider>
       </body>
     </html>
   );
