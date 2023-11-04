@@ -29,7 +29,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <NavBar />
-            {children}
+            <main>{children}</main>
           </ThemeProvider>
         </TRPCReactProvider>
       </body>

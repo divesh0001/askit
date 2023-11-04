@@ -1,27 +1,21 @@
-"use client";
-
 import { ModeToggle } from "~/components/appearance-toggle";
-import Link from "next/link";
 import React from "react";
-import { usePathname } from "next/navigation";
-import { Button } from "~/components/ui/button";
+import NavbarURLS from "~/components/navbar-urls";
+import Link from "next/link";
+import { getServerAuthSession } from "~/server/auth";
+import SignoutButton from "~/components/signout-button";
+import { Avatar, AvatarFallback, AvatarImage } from "src/components/ui/avatar";
 
-export default function NavBar() {
-  const pathname = usePathname();
-
-  // get last word of pathname
-  const path = pathname.split("/").pop();
+export default async function NavBar() {
+  const session = await getServerAuthSession();
 
   return (
     <nav
       className={`absolute z-20 flex w-full items-center justify-between border-b px-4 py-3`}
     >
-      <Button
-        variant={`ghost`}
-        className={`flex items-center justify-center text-lg font-bold`}
-        onClick={() => {
-          window.location.href = "/";
-        }}
+      <Link
+        className={`flex items-center justify-center rounded-xl px-4 py-1 text-lg font-bold hover:bg-muted`}
+        href={`/`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -36,24 +30,27 @@ export default function NavBar() {
           <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
         </svg>
         <p className={`ml-2`}>Askit</p>
-      </Button>
+      </Link>
       <div className={`flex items-center space-x-4`}>
         <ul
           className={`flex items-center space-x-4 text-sm text-foreground/70 backdrop-blur transition-all ease-in-out`}
         >
-          <Link href={`/`} className={`hover:text-foreground`}>
-            Home
-          </Link>
-          {(path === "signup" || path === "signin") &&
-            (path === "signup" ? (
-              <Link href={`/auth/signin`} className={`hover:text-foreground`}>
-                Signin
-              </Link>
-            ) : (
-              <Link href={`/auth/signup`} className={`hover:text-foreground`}>
-                Signup
-              </Link>
-            ))}
+          {session?.user.name ? (
+            <>
+              <SignoutButton className={`hover:text-foreground`} />
+              <Avatar>
+                {session.user.image ? (
+                  <AvatarImage src={session.user.image} />
+                ) : (
+                  <AvatarFallback className={`hover:border`}>
+                    {session.user.name.charAt(0) + session.user.name.charAt(1)}
+                  </AvatarFallback>
+                )}
+              </Avatar>
+            </>
+          ) : (
+            <NavbarURLS />
+          )}
         </ul>
         <ModeToggle />
       </div>

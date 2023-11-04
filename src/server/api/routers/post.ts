@@ -53,4 +53,8 @@ export const postRouter = createTRPCRouter({
         },
       });
     }),
+
+  fetch: publicProcedure.query(({ ctx, input }) => {
+    return ctx.db.post.findMany({});
+  }),
 });

@@ -19,24 +19,15 @@ export default async function Home() {
         <div className={`flex w-full items-center justify-center px-4`}>
           <AskQuestion isSignedIn={session !== null} />
         </div>
-        {session !== null ? (
-          <>
-            <p className={`text-sm text-gray-500`}>
-              Logged in as {session.user.name} |{" "}
-              <SignoutButton className={`text-foreground hover:underline`} />
-            </p>
-          </>
-        ) : (
-          <p className={`text-sm text-gray-500`}>
-            You are not logged in. |{" "}
-            <Link
-              href="/auth/signup"
-              className={`text-foreground hover:underline`}
-            >
-              Signup
-            </Link>
-          </p>
-        )}
+        <p className={`text-sm text-muted-foreground`}>
+          Just wanna answer questions?{" "}
+          <Link
+            href={`/posts`}
+            className={`ml-2 text-foreground hover:underline`}
+          >
+            View all questions here -&gt;
+          </Link>
+        </p>
       </main>
     </PageWrapper>
   );
