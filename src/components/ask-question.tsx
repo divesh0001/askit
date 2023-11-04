@@ -79,7 +79,7 @@ export default function AskQuestion({ isSignedIn }: { isSignedIn: boolean }) {
     }
 
     try {
-      await createQuestion.mutateAsync({
+      const res = await createQuestion.mutateAsync({
         question: question,
         description: description,
         categories: selectedCategories,
@@ -88,16 +88,14 @@ export default function AskQuestion({ isSignedIn }: { isSignedIn: boolean }) {
         title: "Success",
         description: "Your question has been submitted",
       });
+
+      router.push(`/posts/${res.id}`);
     } catch (error) {
       toast.toast({
         title: "Error",
         description: "Something went wrong. Please try again.",
       });
     }
-
-    setIsLoading(false);
-    setQuestion("");
-    setSelectedCategories([]);
   };
 
   return (
