@@ -1,5 +1,6 @@
 import { api } from "~/trpc/server";
 import { PageWrapper } from "~/components/page-transition-wrapper";
+import { Badge } from "~/components/ui/badge";
 
 function howLongAgo(date: Date) {
   const diff = Date.now() - date.getTime();
@@ -49,6 +50,18 @@ export default async function PostsPage() {
             <p className={`mb-2 line-clamp-3 text-muted-foreground`}>
               {post.description}
             </p>
+
+            <div className={`space-x-2`}>
+              {post.categories.length > 0 ? (
+                post.categories.map((category, index) => (
+                  <Badge key={index} variant="outline">
+                    {category}
+                  </Badge>
+                ))
+              ) : (
+                <></>
+              )}
+            </div>
           </div>
         ))}
       </div>
