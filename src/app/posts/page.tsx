@@ -3,6 +3,7 @@ import { PageWrapper } from "~/components/page-transition-wrapper";
 import { Badge } from "~/components/ui/badge";
 import Link from "next/link";
 
+
 function howLongAgo(date: Date) {
   const diff = Date.now() - date.getTime();
   const seconds = Math.floor(diff / 1000);
@@ -32,6 +33,7 @@ function howLongAgo(date: Date) {
 
 export default async function PostsPage() {
   const posts = await api.post.fetchAll.query();
+  // const answers = await api.ans.fetchAll.query();
 
   return (
     <PageWrapper className={`pt-16`}>
@@ -51,6 +53,9 @@ export default async function PostsPage() {
               <p className={`mb-2 line-clamp-3 text-muted-foreground`}>
                 {post.description}
               </p>
+              {/* code for comment box starts here */}
+              
+              {/* code for comment box ends here */}
 
               <div className={`space-x-2`}>
                 {post.categories.length > 0 ? (

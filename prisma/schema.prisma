@@ -47,6 +47,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   posts         Post[]
+  ansposts      Ans[]
   comments      Comment[]
 }
 
@@ -69,7 +70,17 @@ model Post {
   categories  String[]
   Comments    Comment[]
 }
-
+model Ans {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  createdAt   DateTime  @default(now())
+  author      User?     @relation(fields: [authorId], references: [id])
+  authorId    String?   @db.ObjectId
+  postId    String?  @db.ObjectId
+  // categories  String[]
+  // Comments    Comment[]
+}
 model Comment {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
