@@ -18,7 +18,13 @@ import {
 import { Input } from "~/components/ui/input";
 import { useRouter } from "next/navigation";
 
-export default function PostAnswer({ isSignedIn }: { isSignedIn: boolean }) {
+export default function PostAnswer({
+  isSignedIn,
+  postId,
+}: {
+  isSignedIn: boolean;
+  postId: string;
+}) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const toast = useToast();
   const [textareaRows, setTextareaRows] = useState<number>(1);
@@ -27,29 +33,12 @@ export default function PostAnswer({ isSignedIn }: { isSignedIn: boolean }) {
       setIsLoading(false);
     },
   });
-  const router = useRouter();
-
-  const [currentCategory, setCurrentCategory] = useState<string>("");
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   const [answer, setAnswer] = useState<string>("");
-//   const { data: searchResultsData, isLoading: searchResultsLoading } =
-//     api.post.search.useQuery({
-//       question: question,
-//     });
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
-
-    // if (searchResultsData && searchResultsData.length > 0) {
-    //   setIsLoading(false);
-    //   toast.toast({
-    //     title: "Error",
-    //     description: "This question has already been asked",
-    //   });
-    //   return;
-    // }
 
     if (answer.length == 0) {
       setIsLoading(false);
@@ -67,19 +56,11 @@ export default function PostAnswer({ isSignedIn }: { isSignedIn: boolean }) {
 
     target.description.value = "";
 
-    // if (description.length == 0) {
-    //   setIsLoading(false);
-    //   toast.toast({
-    //     title: "Error",
-    //     description: "Please enter a description",
-    //   });
-    //   return;
-    // }
-
     try {
       await postAnswer.mutateAsync({
         answer: answer,
         description: description,
+        postID: postId,
       });
       toast.toast({
         title: "Success",
@@ -94,14 +75,13 @@ export default function PostAnswer({ isSignedIn }: { isSignedIn: boolean }) {
 
     setIsLoading(false);
     setAnswer("");
-    setSelectedCategories([]);
   };
 
   return (
-    <div className={`relative w-full max-w-2xl`}>
+    <div className={`relative mb-4 w-full`}>
       <Textarea
         rows={textareaRows}
-        className={`relative w-full h-10 p-4 pr-20`}
+        className={`relative h-10 w-full p-4 pr-20`}
         disabled={isLoading}
         name={`question`}
         onChange={(event) => {
@@ -123,10 +103,7 @@ export default function PostAnswer({ isSignedIn }: { isSignedIn: boolean }) {
       <Dialog>
         <DialogTrigger
           className={`absolute right-4 top-3`}
-          disabled={
-            !isSignedIn ||
-            answer.length == 0 
-          }
+          disabled={!isSignedIn || answer.length == 0}
           asChild
         >
           <Button>Submit</Button>
@@ -134,22 +111,17 @@ export default function PostAnswer({ isSignedIn }: { isSignedIn: boolean }) {
         <DialogContent>
           <DialogHeader>
             <DialogTitle className={`mb-2`}>Post your answer</DialogTitle>
-            
           </DialogHeader>
 
           <form onSubmit={handleSubmit}>
-            <Input
-              className={`w-full`}
-              placeholder={``}
-              value={answer}
-            /> 
-             <Textarea
+            <Input className={`w-full`} placeholder={``} value={answer} />
+            <Textarea
               className={`mt-2 w-full`}
               rows={4}
               id={`description`}
               name={`description`}
               placeholder={`Describe your answer here...`}
-            /> 
+            />
 
             {/* {selectedCategories.length > 0 ? (
               <div className={`my-4 rounded-xl border p-4`}>
@@ -175,7 +147,7 @@ export default function PostAnswer({ isSignedIn }: { isSignedIn: boolean }) {
                 value={currentCategory}
               /> */}
 
-              {/* <Button
+            {/* <Button
                 type={`button`}
                 className={``}
                 variant={`outline`}
@@ -200,11 +172,10 @@ export default function PostAnswer({ isSignedIn }: { isSignedIn: boolean }) {
               variant={`outline`}
             >
               Post
-              
             </Button>
           </form>
-         </DialogContent>
-       </Dialog>
+        </DialogContent>
+      </Dialog>
       {/* {searchResultsData && question.length > 1 ? (
         <div className={`absolute w-full`}>
           <ScrollArea className="h-72 w-full rounded-md border">

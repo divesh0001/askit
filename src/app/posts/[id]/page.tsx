@@ -1,7 +1,6 @@
 import { PageWrapper } from "~/components/page-transition-wrapper";
 import { api } from "~/trpc/server";
 import Link from "next/link";
-import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import React from "react";
 import PostAnswer from "~/components/ui/post_answer";
@@ -15,7 +14,7 @@ export default async function PostPage({
   };
 }) {
   const post = await api.post.fetch.query({ id: params.id });
-  const ans = await api.ans.fetch.query({ id: params.id });
+  const allAnswers = await api.ans.fetch.query({ id: params.id });
   const session = await getServerAuthSession();
 
   if (!post) {
@@ -61,12 +60,26 @@ export default async function PostPage({
           </div>
         </div>
         <hr className={`my-6`} />
-        <PostAnswer isSignedIn={session !== null} />
-        {/* {code for commentbox} */}
-        <div className={"whitespace-pre-line"}>
-            {ans?.description}
-        </div>
-
+        <PostAnswer isSignedIn={session !== null} postId={params.id} />
+        {allAnswers && allAnswers.length > 0
+          ? allAnswers.map((answer, index) => (
+              <>
+                <div
+                  key={answer.id}
+                  className={`my-6 flex items-center justify-start`}
+                >
+                  <p className={`mr-4`}>{index + 1}. </p>
+                  <div>
+                    <p className={``}>{answer.title}</p>
+                    <p className={`text-muted-foreground`}>
+                      {answer.description}
+                    </p>
+                  </div>
+                </div>
+                <hr className={`my-6`} />
+              </>
+            ))
+          : null}
       </div>
     </PageWrapper>
   );
