@@ -8,7 +8,7 @@ tapestry of wisdom. ASKIT is built with a tech stack comprising **T3-stack**, **
 
 - [🚀 Demo](https://www.askit.study/)
 - [🤝 Contributing Guidelines](CONTRIBUTING.md)
-- [📜 License](LICENSE)
+- [📜 License](LICENSE.md)
 
 ## Table of Contents
 
