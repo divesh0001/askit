@@ -74,19 +74,28 @@ tapestry of wisdom. ASKIT is built with a tech stack comprising **T3-stack**, **
 
 3. Create a .env file in the root directory with the following environment variables and values:
 
-Prisma
+#### Prisma
 
-- #### https://www.prisma.io/docs/reference/database-reference/connection-urls#env
-       DATABASE_URL="file:./db.sqlite"
+- #### Specify the database connection string in the `DATABASE_URL` environment variable in the `.env` file:
+
+```bash
+DATABASE_URL="file:./db.sqlite"
+```
 
 #### Next Auth
 
 - #### You can generate a new secret on the command line with:
+
   ```bash
   openssl rand -base64 32
   ```
-- #### https://next-auth.js.org/configuration/options#secret
+
+  More info [here](https://next-auth.js.org/configuration/options#secret).
+
+- #### NextAuth URL, specify the URL of your application for signing in and callback URLs
+  ```bash
   NEXTAUTH_URL="http://localhost:3000"
+  ```
 
 #### GitHub OAuth
 
