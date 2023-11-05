@@ -1,9 +1,11 @@
 import { PageWrapper } from "~/components/page-transition-wrapper";
 import { api } from "~/trpc/server";
 import Link from "next/link";
+import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import React from "react";
-import GPTAnswer from "~/components/gpt-answer-generation";
+import PostAnswer from "~/components/ui/post_answer";
+import { getServerAuthSession } from "~/server/auth";
 
 export default async function PostPage({
   params,
@@ -13,6 +15,8 @@ export default async function PostPage({
   };
 }) {
   const post = await api.post.fetch.query({ id: params.id });
+  const ans = await api.ans.fetch.query({ id: params.id });
+  const session = await getServerAuthSession();
 
   if (!post) {
     return (
@@ -56,9 +60,13 @@ export default async function PostPage({
             <p className={"whitespace-pre-line"}>{post.description}</p>
           </div>
         </div>
-        <GPTAnswer question={post.title} description={post.description} />
-
         <hr className={`my-6`} />
+        <PostAnswer isSignedIn={session !== null} />
+        {/* {code for commentbox} */}
+        <div className={"whitespace-pre-line"}>
+            {ans?.description}
+        </div>
+
       </div>
     </PageWrapper>
   );
