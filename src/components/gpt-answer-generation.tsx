@@ -46,7 +46,6 @@ export default function GPTAnswer({
       </Button>
       {gptResponse.data && (
         <div className={`my-8 rounded-xl bg-muted p-4`}>
-          AI Answer:
           <p className={`text-sm text-muted-foreground`}>
             {gptResponse.data.text}
           </p>
