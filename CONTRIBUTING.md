@@ -1,10 +1,12 @@
 # Contributing to Askit
 
-Welcome to Askit! We're excited that you're interested in contributing. Please take a moment to review these guidelines before getting started.
+Welcome to Askit! We're excited that you're interested in contributing. Please take a moment to review these guidelines
+before getting started.
 
 ## Code of Conduct
 
-Before contributing, please read and adhere to our [Code of Conduct](CODE_OF_CONDUCT.md). We expect all contributors to be respectful and inclusive.
+Before contributing, please read and adhere to our [Code of Conduct](CODE_OF_CONDUCT.md). We expect all contributors to
+be respectful and inclusive.
 
 ## Getting Started
 
@@ -31,7 +33,8 @@ Before contributing, please read and adhere to our [Code of Conduct](CODE_OF_CON
 
 ## Code Review
 
-Our team will review your PR. You may be asked to make further changes or adjustments to your code. Please be responsive to comments and feedback.
+Our team will review your PR. You may be asked to make further changes or adjustments to your code. Please be responsive
+to comments and feedback.
 
 ## Merging
 
@@ -39,6 +42,7 @@ Once your PR is approved, it will be merged into the main repository. Thank you 
 
 ## Licensing
 
-By contributing to this project, you agree that your contributions will be licensed under the project's [LICENSE](LICENSE.md).
+By contributing to this project, you agree that your contributions will be licensed under the
+project's [LICENSE](LICENSE.md).
 
 Thank you for helping us improve Next.js!

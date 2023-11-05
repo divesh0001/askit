@@ -20,10 +20,11 @@ tapestry of wisdom. ASKIT is built with a tech stack comprising **T3-stack**, **
     - [Next Auth](#next-auth)
     - [GitHub OAuth](#github-oauth)
     - [Google OAuth](#google-oauth)
+    - [OpenAI API Key](#openai-api-key)
 - [🌟Usage](#usage)
 - [Dependencies](#dependencies)
 - [🤝Contributors](#contributors)
-- [License](#license)
+- [📋 License](#-license)
 
 ## ✨ Features
 
@@ -73,7 +74,6 @@ tapestry of wisdom. ASKIT is built with a tech stack comprising **T3-stack**, **
 
 3. Create a .env file in the root directory with the following environment variables and values:
 
-<div style="margin-left: 50px;">
 Prisma
 
 - #### https://www.prisma.io/docs/reference/database-reference/connection-urls#env
@@ -90,17 +90,23 @@ Prisma
 
 #### GitHub OAuth
 
-    GITHUB_CLIENT_ID=""
-    GITHUB_CLIENT_SECRET=""
-    ```
+```bash
+GITHUB_CLIENT_ID=""
+GITHUB_CLIENT_SECRET=""
+```
 
 #### Google OAuth
 
-    GOOGLE_CLIENT_ID=""
-    GOOGLE_CLIENT_SECRET=""
-    ```
+```bash
+GOOGLE_CLIENT_ID=""
+GOOGLE_CLIENT_SECRET=""
+```
 
-</div>
+#### OpenAI API Key
+
+```bash
+OPENAI_API_KEY=""
+```
 
 4. Migrate the database:
 
@@ -122,7 +128,8 @@ Prisma
 
 Visit the ASKIT website [here](https://www.askit.study/).
 Sign in or create an account.
-Ask any question on any topic you would like, if it exists you will be redirected to the question page, if not you will be redirected to the create question page.
+Ask any question on any topic you would like, if it exists you will be redirected to the question page, if not you will
+be redirected to the create question page.
 Ask questions, provide answers, or upvote and comment on existing posts.
 
 ## Dependencies
@@ -136,7 +143,8 @@ Ask questions, provide answers, or upvote and comment on existing posts.
 
 ## 🤝Contributors
 
-The project was a team effort as part of the [HackCBS 6.0](https://hackcbs.tech/) hackathon, India's largest Student run hackathon! The team members are:
+The project was a team effort as part of the [HackCBS 6.0](https://hackcbs.tech/) hackathon, India's largest Student run
+hackathon! The team members are:
 
 - Chirag Aggarwal - [Github](https://github.com/ChiragAgg5k/)
 - Shivangi Tripathi - [Github](https://github.com/ShiviTripathi13/)
@@ -145,6 +153,6 @@ The project was a team effort as part of the [HackCBS 6.0](https://hackcbs.tech/
 
 We all represented our college, [Bennett University](https://bennett.edu.in/), at the hackathon.
 
-## License
+## 📋 License
 
 This project is licensed under the [MIT License](LICENSE.md) License - see the LICENSE file for details.

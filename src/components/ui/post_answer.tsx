@@ -10,13 +10,11 @@ import { useToast } from "~/components/ui/use-toast";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "src/components/ui/dialog";
 import { Input } from "~/components/ui/input";
-import { useRouter } from "next/navigation";
 
 export default function PostAnswer({
   isSignedIn,
