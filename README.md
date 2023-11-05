@@ -141,18 +141,20 @@ Ask any question on any topic you would like, if it exists you will be redirecte
 be redirected to the create question page.
 Ask questions, provide answers, or upvote and comment on existing posts.
 
-## Dependencies
+## Technologies and Services Used
 
-- [T3-stack](https://create.t3.gg) - A fullstack template for Next.js, Prisma, and NextAuth.js
-- [Next.js](https://nextjs.org/) - The React Framework with Hybrid Static & Server Rendering\*\*\*\*
-- [NextAuth.js](https://next-auth.js.org) - Authentication for Next.js
-- [Prisma](https://www.prisma.io/) - Next-generation ORM for Node.js and TypeScript
-- [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework for rapid UI development
-- [tRPC](https://trpc.io/) - End-to-end typesafe APIs made easy
+- [T3-stack](https://create.t3.gg) - A fullstack template for Next.js, Prisma, and NextAuth.js.
+- [Next.js](https://nextjs.org/) - The React Framework with Hybrid Static & Server Rendering.
+- [NextAuth.js](https://next-auth.js.org) - Authentication for Next.js.
+- [Prisma](https://www.prisma.io/) - Next-generation ORM for Node.js and TypeScript.
+- [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework for rapid UI development.
+- [tRPC](https://trpc.io/) - End-to-end typesafe APIs made easy.
 
 - [Mongodb Atlas](https://www.mongodb.com/cloud/atlas) - Cloud database service <img src="public/mongodb_atlas.png" width="150">
 
 - [Replit (Optional)](https://replit.com/) - Online IDE, project deployed [here](https://replit.com/@ChiragAggarwal/askit) <img src="public/replit.png" width="100">
+
+- [GoDaddy Domain](https://godaddy.com/) - Domain name registrar (www.askit.study) <img src="public/godaddy.png" width="150">
 
 ## 🤝Contributors
 
