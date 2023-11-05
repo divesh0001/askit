@@ -37,7 +37,7 @@ export default function GPTAnswer({
         }}
         disabled={loading}
       >
-        Generate Answer with AI{" "}
+        Analyze with AI
         {loading ? (
           <Icons.spinner className={`ml-2 animate-spin`} />
         ) : (

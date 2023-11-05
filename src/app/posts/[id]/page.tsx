@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import React from "react";
 import PostAnswer from "~/components/ui/post_answer";
 import { getServerAuthSession } from "~/server/auth";
+import GPTAnswer from "~/components/gpt-answer-generation";
 
 export default async function PostPage({
   params,
@@ -59,6 +60,7 @@ export default async function PostPage({
             <p className={"whitespace-pre-line"}>{post.description}</p>
           </div>
         </div>
+        <GPTAnswer question={post.title} description={post.description} />
         <hr className={`my-6`} />
         <PostAnswer isSignedIn={session !== null} postId={params.id} />
         {allAnswers && allAnswers.length > 0
