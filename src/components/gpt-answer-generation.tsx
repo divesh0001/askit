@@ -5,24 +5,36 @@ import { BsStars } from "react-icons/bs";
 import React from "react";
 import { api } from "~/trpc/react";
 import { Icons } from "~/components/loading-spinner";
+import { useToast } from "~/components/ui/use-toast";
+import { Toaster } from "~/components/ui/toaster";
 
 export default function GPTAnswer({
   question,
   description,
+  isSignedIn,
 }: {
   question: string;
   description: string;
+  isSignedIn: boolean;
 }) {
   const [prompt, setPrompt] = React.useState<string>("");
   const gptResponse = api.gpt.create.useQuery({
     prompt: prompt,
   });
   const [loading, setLoading] = React.useState<boolean>(false);
+  const toast = useToast();
 
   return (
     <div className={`mt-4 flex flex-col items-center justify-end`}>
       <Button
         onClick={() => {
+          if (!isSignedIn) {
+            toast.toast({
+              title: "Error",
+              description: "You need to be signed in to use this feature",
+            });
+            return;
+          }
           setLoading(true);
           setPrompt(
             "Question: " +
@@ -51,6 +63,8 @@ export default function GPTAnswer({
           </p>
         </div>
       )}
+
+      <Toaster />
     </div>
   );
 }

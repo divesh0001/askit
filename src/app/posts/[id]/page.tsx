@@ -60,7 +60,11 @@ export default async function PostPage({
             <p className={"whitespace-pre-line"}>{post.description}</p>
           </div>
         </div>
-        <GPTAnswer question={post.title} description={post.description} />
+        <GPTAnswer
+          question={post.title}
+          description={post.description}
+          isSignedIn={session !== null}
+        />
         <hr className={`my-6`} />
         <PostAnswer isSignedIn={session !== null} postId={params.id} />
         {allAnswers && allAnswers.length > 0
