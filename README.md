@@ -12,25 +12,33 @@ tapestry of wisdom. ASKIT is built with a tech stack comprising **T3-stack**, **
 
 ## Table of Contents
 
-- [✨ Features](#features)
-- [🚀 Getting Started](#getting-started)
-  - [🛠️ Prerequisites](#prerequisites)
-  - [🚀 Installation](#installation)
-- [🌟 Usage](#usage)
-- [⚙ Configuration](#configuration)
-- [🤝 Contributing](#contributing)
-- [📜 License](#license)
+- [Table of Contents](#table-of-contents)
+- [✨ Features](#-features)
+- [Getting Started](#getting-started)
+  - [🛠️Prerequisites](#️prerequisites)
+  - [Installation](#installation)
+    - [Next Auth](#next-auth)
+    - [GitHub OAuth](#github-oauth)
+    - [Google OAuth](#google-oauth)
+- [🌟Usage](#usage)
+- [Dependencies](#dependencies)
+- [🤝Contributors](#contributors)
+- [License](#license)
 
 ## ✨ Features
 
 - **Diverse Categories:** ASKIT offers a wide variety of categories, not limited to just tech. Users can find answers to
   their questions on topics ranging from technology to arts, science, and more.
 
+<img src="public/diverse_categories.png" alt="Auth" width="400" height="auto" style="margin: 0 auto; display: block;">
+
 - **AI-Powered Search:** Our AI-driven search engine makes it easier to find relevant answers quickly.
 
-- **User Profiles:** Customize your profile, track your contributions, and gain reputation points as you help others.
+<img src="public/ai_analyzer.png" alt="AI Analyze" width="400" height="auto" style="margin: 0 auto; display: block;">
 
 - **Secure Authentication:** We use NextAuth.js for secure and customizable authentication.
+
+<img src="public/authentication.png" alt="Auth" width="400" height="auto" style="margin: 0 auto; display: block;">
 
 - **Efficient Data Handling:** Prisma ensures efficient data handling and database operations.
 
@@ -109,11 +117,6 @@ Prisma
    ```
 
    Your ASKIT instance should now be running at http://localhost:3000.
-
-## ⚙ Configuration
-
-You can customize ASKIT's behavior by modifying the configuration files. Please refer to the official documentation for
-details on configuration options.
 
 ## 🌟Usage
 
