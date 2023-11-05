@@ -1,6 +1,5 @@
-# ASKIT
-
-![ASKIT Logo](askit-logo.png)
+| ![](public/light_landscape.png) | ![](public/dark_portrait.png) |
+| :-----------------------------: | :---------------------------: |
 
 🚀 **ASKIT** is a cutting-edge community-driven Q&A platform that leverages Artificial Intelligence to expand the
 horizons of knowledge sharing beyond technology. It caters to a diverse range of categories, providing users with a rich
@@ -125,20 +124,24 @@ Ask questions, provide answers, or upvote and comment on existing posts.
 
 ## Dependencies
 
-- [T3-stack](https://create.t3.gg)
-- [Next.js](https://nextjs.org/)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://www.prisma.io/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [tRPC](https://trpc.io/)
+- [T3-stack](https://create.t3.gg) - A fullstack template for Next.js, Prisma, and NextAuth.js
+- [Next.js](https://nextjs.org/) - The React Framework with Hybrid Static & Server Rendering
+- [NextAuth.js](https://next-auth.js.org) - Authentication for Next.js
+- [Prisma](https://www.prisma.io/) - Next-generation ORM for Node.js and TypeScript
+- [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework for rapid UI development
+- [tRPC](https://trpc.io/) - End-to-end typesafe APIs made easy
 
 ## 🤝Contributors
+
+The project was a team effort as part of the [HackCBS 6.0](https://hackcbs.tech/) hackathon, India's largest Student run hackathon! The team members are:
 
 - Chirag Aggarwal - [Github](https://github.com/ChiragAgg5k/)
 - Shivangi Tripathi - [Github](https://github.com/ShiviTripathi13/)
 - Divesh Saini - [Github](https://github.com/divesh0001/)
 - Krish - [Github](https://github.com/krishrajput1107)
 
+We all represented our college, [Bennett University](https://bennett.edu.in/), at the hackathon.
+
 ## License
 
-This project is licensed under the [Your License Name] License - see the LICENSE file for details.
+This project is licensed under the [MIT License](LICENSE.md) License - see the LICENSE file for details.
