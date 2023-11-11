@@ -29,9 +29,6 @@ dependencies:
   "@radix-ui/react-label":
     specifier: ^2.0.2
     version: 2.0.2(@types/react-dom@18.2.15)(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
-  "@radix-ui/react-scroll-area":
-    specifier: ^1.0.5
-    version: 1.0.5(@types/react-dom@18.2.15)(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
   "@radix-ui/react-separator":
     specifier: ^1.0.3
     version: 1.0.3(@types/react-dom@18.2.15)(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
@@ -74,9 +71,6 @@ dependencies:
   geist:
     specifier: ^1.1.0
     version: 1.1.0(next@14.0.2)
-  mongodb:
-    specifier: ^6.2.0
-    version: 6.2.0
   next:
     specifier: ^14.0.2
     version: 14.0.2(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)
@@ -762,15 +756,6 @@ packages:
       "@jridgewell/resolve-uri": 3.1.1
       "@jridgewell/sourcemap-codec": 1.4.15
 
-  /@mongodb-js/saslprep@1.1.1:
-    resolution:
-      {
-        integrity: sha512-t7c5K033joZZMspnHg/gWPE4kandgc2OxE74aYOtGKfgB9VPuVJPix0H6fhmm2erj5PBJ21mqcx34lpIGtUCsQ==,
-      }
-    dependencies:
-      sparse-bitfield: 3.0.3
-    dev: false
-
   /@next-auth/prisma-adapter@1.0.7(@prisma/client@5.5.2)(next-auth@4.24.5):
     resolution:
       {
@@ -972,15 +957,6 @@ packages:
         integrity: sha512-Be5hoNF8k+lkB3uEMiCHbhbfF6aj1GnrTBnn5iYFT7GEr3TsOEp1soviEcBR0tYCgHbxjcIxJMhdbvxALJhAqg==,
       }
     requiresBuild: true
-
-  /@radix-ui/number@1.0.1:
-    resolution:
-      {
-        integrity: sha512-T5gIdVO2mmPW3NNhjNgEP3cqMXjXL9UbO0BzWcXfvdBs+BohbQxvd/K5hSVKmn9/lbTdsQVKbUcP5WLCwvUbBg==,
-      }
-    dependencies:
-      "@babel/runtime": 7.23.2
-    dev: false
 
   /@radix-ui/primitive@1.0.1:
     resolution:
@@ -1519,38 +1495,6 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@radix-ui/react-scroll-area@1.0.5(@types/react-dom@18.2.15)(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0):
-    resolution:
-      {
-        integrity: sha512-b6PAgH4GQf9QEn8zbT2XUHpW5z8BzqEc7Kl11TwDrvuTrxlkcjTD5qa/bxgKr+nmuXKu4L/W5UZ4mlP/VG/5Gw==,
-      }
-    peerDependencies:
-      "@types/react": "*"
-      "@types/react-dom": "*"
-      react: ^16.8 || ^17.0 || ^18.0
-      react-dom: ^16.8 || ^17.0 || ^18.0
-    peerDependenciesMeta:
-      "@types/react":
-        optional: true
-      "@types/react-dom":
-        optional: true
-    dependencies:
-      "@babel/runtime": 7.23.2
-      "@radix-ui/number": 1.0.1
-      "@radix-ui/primitive": 1.0.1
-      "@radix-ui/react-compose-refs": 1.0.1(@types/react@18.2.37)(react@18.2.0)
-      "@radix-ui/react-context": 1.0.1(@types/react@18.2.37)(react@18.2.0)
-      "@radix-ui/react-direction": 1.0.1(@types/react@18.2.37)(react@18.2.0)
-      "@radix-ui/react-presence": 1.0.1(@types/react-dom@18.2.15)(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
-      "@radix-ui/react-primitive": 1.0.3(@types/react-dom@18.2.15)(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
-      "@radix-ui/react-use-callback-ref": 1.0.1(@types/react@18.2.37)(react@18.2.0)
-      "@radix-ui/react-use-layout-effect": 1.0.1(@types/react@18.2.37)(react@18.2.0)
-      "@types/react": 18.2.37
-      "@types/react-dom": 18.2.15
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-    dev: false
-
   /@radix-ui/react-separator@1.0.3(@types/react-dom@18.2.15)(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0):
     resolution:
       {
@@ -2066,23 +2010,6 @@ packages:
       {
         integrity: sha512-dqId9J8K/vGi5Zr7oo212BGii5m3q5Hxlkwy3WpYuKPklmBEvsbMYYyLxAQpSffdLl/gdW0XUpKWFvYmyoWCoQ==,
       }
-    dev: false
-
-  /@types/webidl-conversions@7.0.2:
-    resolution:
-      {
-        integrity: sha512-uNv6b/uGRLlCVmelat2rA8bcVd3k/42mV2EmjhPh6JLkd35T5bgwR/t6xy7a9MWhd9sixIeBUzhBenvk3NO+DQ==,
-      }
-    dev: false
-
-  /@types/whatwg-url@8.2.2:
-    resolution:
-      {
-        integrity: sha512-FtQu10RWgn3D9U4aazdwIE2yzphmTJREDqNdODHrbrZmmMqI0vMheC/6NE/J1Yveaj8H+ela+YwWTjq5PGmuhA==,
-      }
-    dependencies:
-      "@types/node": 20.9.0
-      "@types/webidl-conversions": 7.0.2
     dev: false
 
   /@typescript-eslint/eslint-plugin@6.10.0(@typescript-eslint/parser@6.10.0)(eslint@8.53.0)(typescript@5.2.2):
@@ -2674,14 +2601,6 @@ packages:
       electron-to-chromium: 1.4.576
       node-releases: 2.0.13
       update-browserslist-db: 1.0.13(browserslist@4.22.1)
-
-  /bson@6.2.0:
-    resolution:
-      {
-        integrity: sha512-ID1cI+7bazPDyL9wYy9GaQ8gEEohWvcUl/Yf0dIdutJxnmInEEyCsb4awy/OiBfall7zBA179Pahi3vCdFze3Q==,
-      }
-    engines: { node: ">=16.20.1" }
-    dev: false
 
   /buffer@6.0.3:
     resolution:
@@ -4982,13 +4901,6 @@ packages:
       "@types/mdast": 4.0.3
     dev: false
 
-  /memory-pager@1.5.0:
-    resolution:
-      {
-        integrity: sha512-ZS4Bp4r/Zoeq6+NLJpP+0Zzm0pR8whtGPf1XExKLJBAczGMnSi3It14OiNCStjQjM6NU1okjQGSxgEZN8eBYKg==,
-      }
-    dev: false
-
   /merge-stream@2.0.0:
     resolution:
       {
@@ -5316,51 +5228,6 @@ packages:
       }
     engines: { node: ">=10" }
     hasBin: true
-    dev: false
-
-  /mongodb-connection-string-url@2.6.0:
-    resolution:
-      {
-        integrity: sha512-WvTZlI9ab0QYtTYnuMLgobULWhokRjtC7db9LtcVfJ+Hsnyr5eo6ZtNAt3Ly24XZScGMelOcGtm7lSn0332tPQ==,
-      }
-    dependencies:
-      "@types/whatwg-url": 8.2.2
-      whatwg-url: 11.0.0
-    dev: false
-
-  /mongodb@6.2.0:
-    resolution:
-      {
-        integrity: sha512-d7OSuGjGWDZ5usZPqfvb36laQ9CPhnWkAGHT61x5P95p/8nMVeH8asloMwW6GcYFeB0Vj4CB/1wOTDG2RA9BFA==,
-      }
-    engines: { node: ">=16.20.1" }
-    peerDependencies:
-      "@aws-sdk/credential-providers": ^3.188.0
-      "@mongodb-js/zstd": ^1.1.0
-      gcp-metadata: ^5.2.0
-      kerberos: ^2.0.1
-      mongodb-client-encryption: ">=6.0.0 <7"
-      snappy: ^7.2.2
-      socks: ^2.7.1
-    peerDependenciesMeta:
-      "@aws-sdk/credential-providers":
-        optional: true
-      "@mongodb-js/zstd":
-        optional: true
-      gcp-metadata:
-        optional: true
-      kerberos:
-        optional: true
-      mongodb-client-encryption:
-        optional: true
-      snappy:
-        optional: true
-      socks:
-        optional: true
-    dependencies:
-      "@mongodb-js/saslprep": 1.1.1
-      bson: 6.2.0
-      mongodb-connection-string-url: 2.6.0
     dev: false
 
   /ms@2.1.2:
@@ -6150,6 +6017,7 @@ packages:
         integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==,
       }
     engines: { node: ">=6" }
+    dev: true
 
   /queue-microtask@1.2.3:
     resolution:
@@ -6655,15 +6523,6 @@ packages:
       }
     dev: false
 
-  /sparse-bitfield@3.0.3:
-    resolution:
-      {
-        integrity: sha512-kvzhi7vqKTfkh0PZU+2D2PIllw2ymqJKujUcyPMd9Y75Nv4nPbGJZXNhxsgdQab2BmlDct1YnfQCguEvHr7VsQ==,
-      }
-    dependencies:
-      memory-pager: 1.5.0
-    dev: false
-
   /stdin-discarder@0.1.0:
     resolution:
       {
@@ -6975,16 +6834,6 @@ packages:
       {
         integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==,
       }
-    dev: false
-
-  /tr46@3.0.0:
-    resolution:
-      {
-        integrity: sha512-l7FvfAHlcmulp8kr+flpQZmVwtu7nfRV7NZujtN0OqES8EL4O4e0qqzL0DC5gAvx/ZC/9lk6rhcUwYvkBnBnYA==,
-      }
-    engines: { node: ">=12" }
-    dependencies:
-      punycode: 2.3.1
     dev: false
 
   /trim-lines@3.0.1:
@@ -7384,25 +7233,6 @@ packages:
       {
         integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==,
       }
-    dev: false
-
-  /webidl-conversions@7.0.0:
-    resolution:
-      {
-        integrity: sha512-VwddBukDzu71offAQR975unBIGqfKZpM+8ZX6ySk8nYhVoo5CYaZyzt3YBvYtRtO+aoGlqxPg/B87NGVZ/fu6g==,
-      }
-    engines: { node: ">=12" }
-    dev: false
-
-  /whatwg-url@11.0.0:
-    resolution:
-      {
-        integrity: sha512-RKT8HExMpoYx4igMiVMY83lN6UeITKJlBQ+vR/8ZJ8OCdSiN3RwCq+9gH0+Xzj0+5IrM6i4j/6LuvzbZIQgEcQ==,
-      }
-    engines: { node: ">=12" }
-    dependencies:
-      tr46: 3.0.0
-      webidl-conversions: 7.0.0
     dev: false
 
   /whatwg-url@5.0.0:

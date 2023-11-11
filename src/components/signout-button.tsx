@@ -12,12 +12,15 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "src/components/ui/alert-dialog";
+import { Button } from "~/components/ui/button";
 
 export default function SignoutButton({ className }: { className?: string }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <button className={className}>Signout</button>
+        <Button variant={`outline`} className={className}>
+          Signout
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
@@ -28,7 +31,11 @@ export default function SignoutButton({ className }: { className?: string }) {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={() => signOut()}>
+          <AlertDialogAction
+            onClick={async () => {
+              await signOut();
+            }}
+          >
             Continue
           </AlertDialogAction>
         </AlertDialogFooter>

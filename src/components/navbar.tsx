@@ -37,16 +37,21 @@ export default async function NavBar() {
         >
           {session?.user.name ? (
             <>
-              <SignoutButton className={`hover:text-foreground`} />
-              <Avatar>
-                {session.user.image ? (
-                  <AvatarImage src={session.user.image} />
-                ) : (
-                  <AvatarFallback className={`hover:border`}>
-                    {session.user.name.charAt(0) + session.user.name.charAt(1)}
-                  </AvatarFallback>
-                )}
-              </Avatar>
+              <Link
+                href={`/profile/${session.user.id}/`}
+                className={`rounded-full border transition-all duration-300 ease-in-out hover:border-primary`}
+              >
+                <Avatar>
+                  {session.user.image ? (
+                    <AvatarImage src={session.user.image} />
+                  ) : (
+                    <AvatarFallback className={`hover:border`}>
+                      {session.user.name.charAt(0) +
+                        session.user.name.charAt(1)}
+                    </AvatarFallback>
+                  )}
+                </Avatar>
+              </Link>
             </>
           ) : (
             <NavbarURLS />

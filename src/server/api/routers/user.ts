@@ -27,6 +27,9 @@ export const userRouter = createTRPCRouter({
       }),
     )
     .query(async ({ ctx, input }) => {
+      if (input.id === undefined) return undefined;
+
+      if (input.id.length != 24) return undefined;
       return ctx.db.user.findUnique({
         where: {
           id: input.id,

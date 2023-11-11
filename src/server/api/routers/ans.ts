@@ -71,6 +71,9 @@ export const ansRouter = createTRPCRouter({
         where: {
           postId: input.id,
         },
+        orderBy: {
+          createdAt: "desc",
+        },
       });
     }),
 });

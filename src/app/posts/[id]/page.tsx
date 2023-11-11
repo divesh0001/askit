@@ -50,15 +50,17 @@ export default async function PostPage({
           <div className={`flex`}>
             {user?.name && (
               <div className={`px-6  pt-2`}>
-                <Avatar>
-                  {user.image ? (
-                    <AvatarImage src={user.image} />
-                  ) : (
-                    <AvatarFallback className={`hover:border`}>
-                      {user.name.charAt(0) + user.name.charAt(1)}
-                    </AvatarFallback>
-                  )}
-                </Avatar>
+                <Link href={`/profile/${user.id}`}>
+                  <Avatar>
+                    {user.image ? (
+                      <AvatarImage src={user.image} />
+                    ) : (
+                      <AvatarFallback className={`hover:border`}>
+                        {user.name.charAt(0) + user.name.charAt(1)}
+                      </AvatarFallback>
+                    )}
+                  </Avatar>
+                </Link>
               </div>
             )}
             <div>
