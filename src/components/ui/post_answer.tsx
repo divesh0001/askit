@@ -7,15 +7,6 @@ import { api } from "~/trpc/react";
 import { Toaster } from "~/components/ui/toaster";
 import { useToast } from "~/components/ui/use-toast";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "src/components/ui/dialog";
-import { Input } from "~/components/ui/input";
-
 export default function PostAnswer({
   isSignedIn,
   postId,

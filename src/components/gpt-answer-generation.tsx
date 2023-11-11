@@ -5,36 +5,24 @@ import { BsStars } from "react-icons/bs";
 import React from "react";
 import { api } from "~/trpc/react";
 import { Icons } from "~/components/loading-spinner";
-import { useToast } from "~/components/ui/use-toast";
 import { Toaster } from "~/components/ui/toaster";
 import Markdown from "react-markdown";
 
 export default function GPTAnswer({
   question,
   description,
-  isSignedIn,
   answeredPosts,
 }: {
   question: string;
   description: string;
-  isSignedIn: boolean;
   answeredPosts: string[];
 }) {
   const [prompt, setPrompt] = React.useState<string>("");
   const gptResponse = api.gpt.create.useQuery({
     prompt: prompt,
   });
-  const toast = useToast();
 
   const handleClick = () => {
-    if (!isSignedIn) {
-      toast.toast({
-        title: "Error",
-        description: "You need to be signed in to use this feature",
-      });
-      return;
-    }
-
     let prompt =
       "Question: " + question + "\n\n" + "Description: " + description + "\n\n";
     if (answeredPosts.length > 0) {

@@ -13,7 +13,7 @@ export const gptRouter = createTRPCRouter({
         prompt: z.string(),
       }),
     )
-    .query(async ({ ctx, input }) => {
+    .query(async ({ input }) => {
       if (input.prompt === "") return undefined;
 
       const completion = await openai.completions.create({
@@ -24,7 +24,6 @@ export const gptRouter = createTRPCRouter({
         max_tokens: 1000,
       });
 
-      const result = completion.choices[0];
-      return result;
+      return completion.choices[0];
     }),
 });

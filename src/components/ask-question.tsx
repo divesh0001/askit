@@ -2,7 +2,7 @@
 
 import { Textarea } from "~/components/ui/textarea";
 import { Button } from "~/components/ui/button";
-import { useState } from "react";
+import React, { useState } from "react";
 import { api } from "~/trpc/react";
 import { Toaster } from "~/components/ui/toaster";
 import { useToast } from "~/components/ui/use-toast";
@@ -35,10 +35,9 @@ export default function AskQuestion({ isSignedIn }: { isSignedIn: boolean }) {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   const [question, setQuestion] = useState<string>("");
-  const { data: searchResultsData, isLoading: searchResultsLoading } =
-    api.post.search.useQuery({
-      question: question,
-    });
+  const { data: searchResultsData } = api.post.search.useQuery({
+    question: question,
+  });
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

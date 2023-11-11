@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion"; // Fade in and out animation for page transitions
+import { motion } from "framer-motion";
+import React from "react"; // Fade in and out animation for page transitions
 
 // Fade in and out animation for page transitions
 

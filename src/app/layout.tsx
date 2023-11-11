@@ -1,11 +1,12 @@
 import "~/styles/globals.css";
 
 import { headers } from "next/headers";
-import { GeistSans } from "geist/font";
+import { GeistSans } from "geist/font/sans";
 import { TRPCReactProvider } from "~/trpc/react";
 import { ThemeProvider } from "~/components/theme-provider";
 import NavBar from "~/components/navbar";
 import NextTopLoader from "nextjs-toploader";
+import React from "react";
 
 export const metadata = {
   title: "Askit",

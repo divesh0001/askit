@@ -151,11 +151,14 @@ Ask questions, provide answers, or upvote and comment on existing posts.
 - [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework for rapid UI development.
 - [tRPC](https://trpc.io/) - End-to-end typesafe APIs made easy.
 
-- [Mongodb Atlas](https://www.mongodb.com/cloud/atlas) - Cloud database service <img src="public/mongodb_atlas.png" width="150">
+- [Mongodb Atlas](https://www.mongodb.com/cloud/atlas) - Cloud database
+  service <img src="public/mongodb_atlas.png" width="150">
 
-- [Replit (Optional)](https://replit.com/) - Online IDE, project deployed [here](https://replit.com/@ChiragAggarwal/askit) <img src="public/replit.png" width="100">
+- [Replit (Optional)](https://replit.com/) - Online IDE, project
+  deployed [here](https://replit.com/@ChiragAggarwal/askit) <img src="public/replit.png" width="100">
 
-- [GoDaddy Domain](https://godaddy.com/) - Domain name registrar (www.askit.study) <img src="public/godaddy.png" width="150">
+- [GoDaddy Domain](https://godaddy.com/) - Domain name
+  registrar (www.askit.study) <img src="public/godaddy.png" width="150">
 
 ## 🤝Contributors
 

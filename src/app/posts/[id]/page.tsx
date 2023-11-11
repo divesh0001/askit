@@ -8,9 +8,9 @@ import { getServerAuthSession } from "~/server/auth";
 import GPTAnswer from "~/components/gpt-answer-generation";
 import { Button } from "~/components/ui/button";
 import AnsAuthor from "~/app/posts/[id]/ans-author";
-import { howLongAgo } from "~/app/posts/allposts/[pagenumber]/page";
 import { BsStars } from "react-icons/bs";
 import Markdown from "react-markdown";
+import { howLongAgo } from "~/lib/utils";
 
 export default async function PostPage({
   params,
@@ -70,7 +70,6 @@ export default async function PostPage({
             <GPTAnswer
               question={post.title}
               description={post.description}
-              isSignedIn={session !== null}
               answeredPosts={
                 allAnswers ? allAnswers.map((answer) => answer.description) : []
               }
@@ -95,7 +94,7 @@ export default async function PostPage({
             <></>
           )}
           {allAnswers && allAnswers.length > 0
-            ? allAnswers.map((answer, index) => (
+            ? allAnswers.map((answer) => (
                 <>
                   <div
                     key={answer.id}
