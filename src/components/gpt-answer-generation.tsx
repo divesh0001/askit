@@ -7,6 +7,7 @@ import { api } from "~/trpc/react";
 import { Icons } from "~/components/loading-spinner";
 import { useToast } from "~/components/ui/use-toast";
 import { Toaster } from "~/components/ui/toaster";
+import Markdown from "react-markdown";
 
 export default function GPTAnswer({
   question,
@@ -43,10 +44,14 @@ export default function GPTAnswer({
         "\n\n";
       prompt +=
         "You need to take these answers into account when writing your answer. \n\n";
+      prompt +=
+        "Highlight points taken from these answers in your answer by using the **bold** or *italic* markdown syntax. \n\n";
     }
 
     prompt +=
       "The answer must be concise and to the point. Try to split it into points if possible. \n\n";
+    prompt +=
+      "The answer should be in markdown format, and must highlight the important points using the **bold** or *italic* markdown syntax. \n\n";
 
     setPrompt(prompt);
   };
@@ -54,7 +59,7 @@ export default function GPTAnswer({
   return (
     <div className={`mt-4 flex flex-col items-center justify-end`}>
       <Button onClick={handleClick} disabled={gptResponse.isLoading}>
-        Analyze with AI
+        {answeredPosts.length > 0 ? "Analyze with AI" : "Answer with AI"}
         {gptResponse.isLoading ? (
           <Icons.spinner className={`ml-2 animate-spin`} />
         ) : (
@@ -64,7 +69,7 @@ export default function GPTAnswer({
       {gptResponse.data && (
         <div className={`my-8 rounded-xl bg-muted p-4`}>
           <p className={`text-sm text-muted-foreground`}>
-            {gptResponse.data.text}
+            <Markdown>{gptResponse.data.text}</Markdown>
           </p>
         </div>
       )}

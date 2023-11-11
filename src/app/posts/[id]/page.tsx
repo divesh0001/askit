@@ -9,6 +9,8 @@ import GPTAnswer from "~/components/gpt-answer-generation";
 import { Button } from "~/components/ui/button";
 import AnsAuthor from "~/app/posts/[id]/ans-author";
 import { howLongAgo } from "~/app/posts/allposts/[pagenumber]/page";
+import { BsStars } from "react-icons/bs";
+import Markdown from "react-markdown";
 
 export default async function PostPage({
   params,
@@ -64,14 +66,23 @@ export default async function PostPage({
               <p className={"whitespace-pre-line"}>{post.description}</p>
             </div>
           </div>
-          <GPTAnswer
-            question={post.title}
-            description={post.description}
-            isSignedIn={session !== null}
-            answeredPosts={
-              allAnswers ? allAnswers.map((answer) => answer.description) : []
-            }
-          />
+          {session && session.user ? (
+            <GPTAnswer
+              question={post.title}
+              description={post.description}
+              isSignedIn={session !== null}
+              answeredPosts={
+                allAnswers ? allAnswers.map((answer) => answer.description) : []
+              }
+            />
+          ) : (
+            <div className={`mt-4 flex flex-col items-center justify-end`}>
+              <Button disabled>
+                Sign in to Analyze with AI
+                <BsStars className={`ml-2`} />
+              </Button>
+            </div>
+          )}
           <hr className={`my-6`} />
           <PostAnswer isSignedIn={session !== null} postId={params.id} />
           {allAnswers && allAnswers.length === 0 ? (
@@ -93,9 +104,11 @@ export default async function PostPage({
                     {answer.authorId !== null && (
                       <AnsAuthor authorId={answer.authorId} />
                     )}
-                    <p className={`ml-4 text-muted-foreground`}>
+                    <Markdown
+                      className={`ml-4 text-base text-muted-foreground`}
+                    >
                       {answer.description}
-                    </p>
+                    </Markdown>
                   </div>
                   <p
                     className={`whitespace-nowrap px-2 text-end text-sm text-muted-foreground`}

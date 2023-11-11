@@ -39,7 +39,7 @@ export default function PostAnswer({
     if (!isSignedIn) {
       toast.toast({
         title: "Error",
-        description: "You need to be signed in to use this feature",
+        description: "You need to be signed in to add an answer",
       });
       return;
     }
