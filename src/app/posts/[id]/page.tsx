@@ -6,6 +6,9 @@ import React from "react";
 import PostAnswer from "~/components/ui/post_answer";
 import { getServerAuthSession } from "~/server/auth";
 import GPTAnswer from "~/components/gpt-answer-generation";
+import { Button } from "~/components/ui/button";
+import AnsAuthor from "~/app/posts/[id]/ans-author";
+import { howLongAgo } from "~/app/posts/allposts/[pagenumber]/page";
 
 export default async function PostPage({
   params,
@@ -39,54 +42,78 @@ export default async function PostPage({
   const user = await api.user.fetch.query({ id: post.authorId ?? "" });
 
   return (
-    <PageWrapper className={`pt-16`}>
-      <div className={`p-10`}>
-        <div className={`flex`}>
-          {user?.name && (
-            <div className={`px-6  pt-2`}>
-              <Avatar>
-                {user.image ? (
-                  <AvatarImage src={user.image} />
-                ) : (
-                  <AvatarFallback className={`hover:border`}>
-                    {user.name.charAt(0) + user.name.charAt(1)}
-                  </AvatarFallback>
-                )}
-              </Avatar>
+    <>
+      <PageWrapper className={`pt-16`}>
+        <div className={`p-10`}>
+          <div className={`flex`}>
+            {user?.name && (
+              <div className={`px-6  pt-2`}>
+                <Avatar>
+                  {user.image ? (
+                    <AvatarImage src={user.image} />
+                  ) : (
+                    <AvatarFallback className={`hover:border`}>
+                      {user.name.charAt(0) + user.name.charAt(1)}
+                    </AvatarFallback>
+                  )}
+                </Avatar>
+              </div>
+            )}
+            <div>
+              <h1 className={`mb-6 text-2xl font-bold`}>{post.title}</h1>
+              <p className={"whitespace-pre-line"}>{post.description}</p>
             </div>
-          )}
-          <div>
-            <h1 className={`mb-6 text-2xl font-bold`}>{post.title}</h1>
-            <p className={"whitespace-pre-line"}>{post.description}</p>
           </div>
-        </div>
-        <GPTAnswer
-          question={post.title}
-          description={post.description}
-          isSignedIn={session !== null}
-        />
-        <hr className={`my-6`} />
-        <PostAnswer isSignedIn={session !== null} postId={params.id} />
-        {allAnswers && allAnswers.length > 0
-          ? allAnswers.map((answer, index) => (
-              <>
-                <div
-                  key={answer.id}
-                  className={`my-6 flex items-center justify-start`}
-                >
-                  <p className={`mr-4`}>{index + 1}. </p>
-                  <div>
-                    <p className={``}>{answer.title}</p>
-                    <p className={`text-muted-foreground`}>
+          <GPTAnswer
+            question={post.title}
+            description={post.description}
+            isSignedIn={session !== null}
+            answeredPosts={
+              allAnswers ? allAnswers.map((answer) => answer.description) : []
+            }
+          />
+          <hr className={`my-6`} />
+          <PostAnswer isSignedIn={session !== null} postId={params.id} />
+          {allAnswers && allAnswers.length === 0 ? (
+            <div className={`flex min-h-[30dvh] items-center justify-center`}>
+              <p className={`text-center text-sm text-muted-foreground`}>
+                No answers yet. Be the first to answer!
+              </p>
+            </div>
+          ) : (
+            <></>
+          )}
+          {allAnswers && allAnswers.length > 0
+            ? allAnswers.map((answer, index) => (
+                <>
+                  <div
+                    key={answer.id}
+                    className={`mb-2 mt-6 flex items-start justify-start`}
+                  >
+                    {answer.authorId !== null && (
+                      <AnsAuthor authorId={answer.authorId} />
+                    )}
+                    <p className={`ml-4 text-muted-foreground`}>
                       {answer.description}
                     </p>
                   </div>
-                </div>
-                <hr className={`my-6`} />
-              </>
-            ))
-          : null}
-      </div>
-    </PageWrapper>
+                  <p
+                    className={`whitespace-nowrap px-2 text-end text-sm text-muted-foreground`}
+                  >
+                    {howLongAgo(answer.createdAt)}
+                  </p>
+                  <hr className={`my-6`} />
+                </>
+              ))
+            : null}
+        </div>
+      </PageWrapper>
+      <Link
+        href={`/posts/allposts/0`}
+        className={`fixed bottom-0 p-4 text-sm text-muted-foreground`}
+      >
+        <Button variant={`secondary`}>Back to all posts</Button>
+      </Link>
+    </>
   );
 }

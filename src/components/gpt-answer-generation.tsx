@@ -12,45 +12,50 @@ export default function GPTAnswer({
   question,
   description,
   isSignedIn,
+  answeredPosts,
 }: {
   question: string;
   description: string;
   isSignedIn: boolean;
+  answeredPosts: string[];
 }) {
   const [prompt, setPrompt] = React.useState<string>("");
   const gptResponse = api.gpt.create.useQuery({
     prompt: prompt,
   });
-  const [loading, setLoading] = React.useState<boolean>(false);
   const toast = useToast();
+
+  const handleClick = () => {
+    if (!isSignedIn) {
+      toast.toast({
+        title: "Error",
+        description: "You need to be signed in to use this feature",
+      });
+      return;
+    }
+
+    let prompt =
+      "Question: " + question + "\n\n" + "Description: " + description + "\n\n";
+    if (answeredPosts.length > 0) {
+      prompt +=
+        "Here are some of the answers given by other users: \n\n" +
+        answeredPosts.join("\n") +
+        "\n\n";
+      prompt +=
+        "You need to take these answers into account when writing your answer. \n\n";
+    }
+
+    prompt +=
+      "The answer must be concise and to the point. Try to split it into points if possible. \n\n";
+
+    setPrompt(prompt);
+  };
 
   return (
     <div className={`mt-4 flex flex-col items-center justify-end`}>
-      <Button
-        onClick={() => {
-          if (!isSignedIn) {
-            toast.toast({
-              title: "Error",
-              description: "You need to be signed in to use this feature",
-            });
-            return;
-          }
-          setLoading(true);
-          setPrompt(
-            "Question: " +
-              question +
-              "\nDescription: " +
-              description +
-              "\nAnswer:",
-          );
-          setTimeout(() => {
-            setLoading(false);
-          }, 3000);
-        }}
-        disabled={loading}
-      >
+      <Button onClick={handleClick} disabled={gptResponse.isLoading}>
         Analyze with AI
-        {loading ? (
+        {gptResponse.isLoading ? (
           <Icons.spinner className={`ml-2 animate-spin`} />
         ) : (
           <BsStars className={`ml-2`} />

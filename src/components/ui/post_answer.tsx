@@ -36,6 +36,13 @@ export default function PostAnswer({
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!isSignedIn) {
+      toast.toast({
+        title: "Error",
+        description: "You need to be signed in to use this feature",
+      });
+      return;
+    }
     setIsLoading(true);
 
     if (answer.length == 0) {
@@ -47,17 +54,9 @@ export default function PostAnswer({
       return;
     }
 
-    const target = event.target as typeof event.target & {
-      description: { value: string };
-    };
-    const description = target.description.value;
-
-    target.description.value = "";
-
     try {
       await postAnswer.mutateAsync({
         answer: answer,
-        description: description,
         postID: postId,
       });
       toast.toast({
@@ -73,147 +72,84 @@ export default function PostAnswer({
 
     setIsLoading(false);
     setAnswer("");
+
+    window.location.reload();
   };
 
   return (
     <div className={`relative mb-4 w-full`}>
-      <Textarea
-        rows={textareaRows}
-        className={`relative h-10 w-full p-4 pr-20`}
-        disabled={isLoading}
-        name={`question`}
-        onChange={(event) => {
-          if (event.target.value.length == 0) {
-            return;
-          }
-          setAnswer(event.target.value);
-        }}
-        onKeyDown={(event) => {
-          if (event.key == "Enter") {
-            setTextareaRows(textareaRows + 1);
-            return;
-          }
-        }}
-        id={`answer`}
-        placeholder="Give a brief about your answer here..."
-      />
-
-      <Dialog>
-        <DialogTrigger
-          className={`absolute right-4 top-3`}
-          disabled={!isSignedIn || answer.length == 0}
-          asChild
-        >
-          <Button>Submit</Button>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle className={`mb-2`}>Post your answer</DialogTitle>
-          </DialogHeader>
-
-          <form onSubmit={handleSubmit}>
-            <Input className={`w-full`} placeholder={``} value={answer} />
-            <Textarea
-              className={`mt-2 w-full`}
-              rows={4}
-              id={`description`}
-              name={`description`}
-              placeholder={`Describe your answer here...`}
-            />
-
-            {/* {selectedCategories.length > 0 ? (
-              <div className={`my-4 rounded-xl border p-4`}>
-                <p className={`text-sm font-bold`}>Selected Categories:</p>
-                {selectedCategories.map((category) => (
-                  <div
-                    key={category}
-                    className={`text-sm text-muted-foreground`}
-                  >
-                    {category},
-                  </div>
-                ))}
-              </div>
-            ) : null} */}
-
-            {/* <div className={`mt-4 flex items-center`}>
-              <Input
-                placeholder={`Category`}
-                className={`w-full`}
-                onChange={(event) => {
-                  setCurrentCategory(event.target.value);
-                }}
-                value={currentCategory}
-              /> */}
-
-            {/* <Button
-                type={`button`}
-                className={``}
-                variant={`outline`}
-                onClick={() => {
-                  if (currentCategory.length == 0) {
-                    return;
-                  }
-                  setSelectedCategories([
-                    ...selectedCategories,
-                    currentCategory,
-                  ]);
-                  setCurrentCategory("");
-                }}
-              >
-                Add
-              </Button> */}
-            {/* </div> */}
-
-            <Button
-              type={`submit`}
-              className={`mt-4 w-full`}
-              variant={`outline`}
-            >
-              Post
-            </Button>
-          </form>
-        </DialogContent>
-      </Dialog>
-      {/* {searchResultsData && question.length > 1 ? (
-        <div className={`absolute w-full`}>
-          <ScrollArea className="h-72 w-full rounded-md border">
-            <div className="bg-background p-4">
-              {searchResultsData.map((result) => (
-                <>
-                  <Button
-                    variant={`ghost`}
-                    key={result.title}
-                    onClick={() => {
-                      router.push(`/posts/${result.id}`);
-                    }}
-                    className="overflow-x-scroll text-sm font-normal"
-                  >
-                    {result.title.charAt(0).toUpperCase() +
-                      result.title.slice(1)}
-                  </Button>
-                  <Separator className="my-2" />
-                </>
-              ))}
-
-              {searchResultsData.length == 0 ? (
-                <div className="text-sm">No results found</div>
-              ) : null}
-            </div>
-          </ScrollArea>
+      <form onSubmit={handleSubmit}>
+        <Textarea
+          rows={textareaRows}
+          className={`relative h-10 w-full p-4 pr-20`}
+          disabled={isLoading}
+          name={`question`}
+          onChange={(event) => {
+            if (event.target.value.length == 0) {
+              return;
+            }
+            setAnswer(event.target.value);
+          }}
+          onKeyDown={(event) => {
+            if (event.key == "Enter") {
+              setTextareaRows(textareaRows + 1);
+              return;
+            }
+          }}
+          id={`answer`}
+          placeholder="Give a brief about your answer here..."
+        />
+        <div className={`absolute right-4 top-3`}>
+          <Button
+            type={`submit`}
+            variant={`outline`}
+            disabled={answer.length == 0}
+          >
+            Post
+          </Button>
         </div>
-      ) : null} */}
+      </form>
 
-      {/* <Dialog>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Are you sure absolutely sure?</DialogTitle>
-            <DialogDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
-            </DialogDescription>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog> */}
+      {/*<Dialog>*/}
+      {/*  <DialogTrigger*/}
+      {/*    className={`absolute right-4 top-3`}*/}
+      {/*    disabled={!isSignedIn || answer.length == 0}*/}
+      {/*    asChild*/}
+      {/*  >*/}
+      {/*    <Button>Submit</Button>*/}
+      {/*  </DialogTrigger>*/}
+      {/*  <DialogContent>*/}
+      {/*    <DialogHeader>*/}
+      {/*      <DialogTitle className={`mb-2`}>Post your answer</DialogTitle>*/}
+      {/*    </DialogHeader>*/}
+
+      {/*    <form onSubmit={handleSubmit}>*/}
+      {/*      <Input*/}
+      {/*        className={`w-full`}*/}
+      {/*        placeholder={``}*/}
+      {/*        value={answer}*/}
+      {/*        onChange={(event) => {*/}
+      {/*          setAnswer(event.target.value);*/}
+      {/*        }}*/}
+      {/*      />*/}
+      {/*      <Textarea*/}
+      {/*        className={`mt-2 w-full`}*/}
+      {/*        rows={4}*/}
+      {/*        id={`description`}*/}
+      {/*        name={`description`}*/}
+      {/*        placeholder={`Describe your answer here...`}*/}
+      {/*      />*/}
+
+      {/*      <Button*/}
+      {/*        type={`submit`}*/}
+      {/*        className={`mt-4 w-full`}*/}
+      {/*        variant={`outline`}*/}
+      {/*      >*/}
+      {/*        Post*/}
+      {/*      </Button>*/}
+      {/*    </form>*/}
+      {/*  </DialogContent>*/}
+      {/*</Dialog>*/}
 
       <Toaster />
     </div>

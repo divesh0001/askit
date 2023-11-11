@@ -71,7 +71,6 @@ model Post {
 
 model Ans {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
   description String
   createdAt   DateTime @default(now())
   author      User?    @relation(fields: [authorId], references: [id])

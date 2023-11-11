@@ -11,7 +11,6 @@ export const ansRouter = createTRPCRouter({
     .input(
       z.object({
         answer: z.string(),
-        description: z.string(),
         postID: z.string(),
       }),
     )
@@ -22,11 +21,8 @@ export const ansRouter = createTRPCRouter({
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-call
       return ctx.db.ans.create({
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         data: {
-          title: input.answer,
-          description: input.description,
+          description: input.answer,
           Post: {
             connect: {
               id: input.postID,

@@ -4,7 +4,7 @@ import { Badge } from "~/components/ui/badge";
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
 
-function howLongAgo(date: Date) {
+export function howLongAgo(date: Date) {
   const diff = Date.now() - date.getTime();
   const seconds = Math.floor(diff / 1000);
   const minutes = Math.floor(seconds / 60);
@@ -78,7 +78,9 @@ export default async function PostsPage({
 
         {posts.length === 0 ? (
           <div className={`flex min-h-[80dvh] items-center justify-center`}>
-            <p className={`text-muted-foreground`}>No more posts to show.</p>
+            <p className={`font-semibold text-muted-foreground`}>
+              No more posts to show.
+            </p>
           </div>
         ) : (
           <div className={`flex justify-center`}>
