@@ -50,8 +50,10 @@ export const postRouter = createTRPCRouter({
         where: {
           title: {
             contains: input.question,
-            mode: "insensitive",
           },
+        },
+        orderBy: {
+          createdAt: "desc",
         },
       });
     }),

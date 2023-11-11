@@ -13,7 +13,7 @@ export default function AnsAuthor({ authorId }: { authorId: string }) {
   }
 
   return (
-    <div className={`mt-4`}>
+    <div className={`mt-2`}>
       {user?.data?.name && (
         <Avatar>
           {user.data.image ? (

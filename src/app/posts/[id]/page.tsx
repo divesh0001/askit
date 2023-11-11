@@ -98,7 +98,7 @@ export default async function PostPage({
                 <>
                   <div
                     key={answer.id}
-                    className={`mb-2 mt-6 flex items-start justify-start`}
+                    className={`mb-2 mt-6 flex items-center justify-start`}
                   >
                     {answer.authorId !== null && (
                       <AnsAuthor authorId={answer.authorId} />

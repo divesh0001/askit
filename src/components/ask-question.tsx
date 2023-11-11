@@ -6,7 +6,6 @@ import React, { useState } from "react";
 import { api } from "~/trpc/react";
 import { Toaster } from "~/components/ui/toaster";
 import { useToast } from "~/components/ui/use-toast";
-import { ScrollArea } from "src/components/ui/scroll-area";
 import { Separator } from "src/components/ui/separator";
 
 import {
@@ -19,6 +18,7 @@ import {
 } from "src/components/ui/dialog";
 import { Input } from "~/components/ui/input";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function AskQuestion({ isSignedIn }: { isSignedIn: boolean }) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -210,31 +210,26 @@ export default function AskQuestion({ isSignedIn }: { isSignedIn: boolean }) {
       </Dialog>
 
       {searchResultsData && question.length > 1 ? (
-        <div className={`absolute w-full`}>
-          <ScrollArea className="h-72 w-full rounded-md border">
-            <div className="bg-background p-4">
-              {searchResultsData.map((result) => (
-                <>
+        <div className={`absolute w-full w-full bg-background`}>
+          <div className="h-72 w-full overflow-x-scroll rounded-md border">
+            <div className="pt-2">
+              {searchResultsData.map((result, index) => (
+                <Link href={`/posts/${result.id}`} key={index}>
                   <Button
                     variant={`ghost`}
-                    key={result.title}
-                    onClick={() => {
-                      router.push(`/posts/${result.id}`);
-                    }}
                     className="overflow-x-scroll text-sm font-normal"
                   >
-                    {result.title.charAt(0).toUpperCase() +
-                      result.title.slice(1)}
+                    <p className={`overflow-ellipsis`}>{result.title}</p>
                   </Button>
-                  <Separator className="my-2" />
-                </>
+                  <Separator className="my-2 w-full" />
+                </Link>
               ))}
 
               {searchResultsData.length == 0 ? (
                 <div className="text-sm">No results found</div>
               ) : null}
             </div>
-          </ScrollArea>
+          </div>
         </div>
       ) : null}
 
